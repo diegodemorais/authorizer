@@ -1,0 +1,27 @@
+Model (POJO) para os 2 JSON de entrada
+Model (POJO) para os 2 JSON de saída
+
+Estrutura de dados para histórico de transações
+Estrutura de dados para conta e status
+
+Leitura do STDIN por linha e deserialização no POJO
+Regras de negócio -> Desing Pattern Strategy
+Tratamento de exceções de negócio
+    - Classe para cada exceção com retorno em String
+
+Atualização do status da conta e retorno da exceção
+Serialização da conta e status para STDOUT
+
+Testes unitários:
+    - Criação de conta
+    - Criação de conta duplicada
+    - Transação ok
+    - Transação sem saldo
+    - Transação duplicada
+    - Transação xxx
+
+Teste integrado
+    - Fluxo completo
+           - Leitura de arquivo json
+           - regras de negócio
+           - saída stdout
