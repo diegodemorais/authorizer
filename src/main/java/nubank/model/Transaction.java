@@ -1,10 +1,11 @@
 package nubank.model;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import java.time.Instant;
 
 @JsonRootName("transaction")
-public class Transaction {
+public class Transaction extends Base {
     private String merchant;
     private int amount;
     private Instant time;

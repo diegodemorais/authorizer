@@ -2,7 +2,10 @@ package nubank.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import nubank.exception.BusinessException;
+import nubank.validator.AccountValidator;
 import nubank.validator.BusinessValidator;
+import nubank.validator.TransactionValidator;
 
 public class Base {
 
@@ -11,9 +14,8 @@ public class Base {
     @JsonIgnore
     private BusinessValidator validator;
 
-    public Base(BusinessValidator validator) {
+    public Base() {
         this.initilizeViolations();
-        this.setValidator(validator);
     }
 
     public String[] getViolations() {
@@ -21,18 +23,33 @@ public class Base {
     }
 
     void setViolations(String violations) {
-        this.violations = new String[] { violations } ;
+        this.violations = new String[]{violations};
     }
 
     void initilizeViolations() {
-        this.violations = new String[] { } ;
+        this.violations = new String[]{};
     }
 
-    BusinessValidator getValidator() {
-        return validator;
+    boolean validate() {
+        try {
+            if (this instanceof Account) {
+                this.performValidate(AccountValidator.AccountAlreadyInitialized);
+            } else {
+                this.performValidate(TransactionValidator.TestTest);
+            }
+            this.initilizeViolations();
+        } catch (BusinessException e) {
+            this.setViolations(e.getMessage());
+            return false;
+        }
+        return true;
     }
 
-    void setValidator(BusinessValidator validator) {
-        this.validator = validator;
+    private void performValidate(BusinessValidator validator) throws BusinessException {
+        if (validator instanceof AccountValidator) {
+            validator.validate((Account)this);
+        } else {
+            validator.validate((Transaction)this);
+        }
     }
 }
