@@ -11,7 +11,7 @@ import nubank.model.Transaction;
 import java.util.Iterator;
 import java.util.Map;
 
-public enum TransactionValidator implements ITransactionValidator {
+public enum TransactionProcessorValidator implements ITransactionProcessorValidator {
 
     InsufficientLimit {
         public void validate(Account account, Transaction transaction, TransactionProcessor processor) throws InsufficientLimitException {
@@ -29,14 +29,14 @@ public enum TransactionValidator implements ITransactionValidator {
     },
     HighFrequencySmallInterval {
         public void validate(Account account, Transaction transaction, TransactionProcessor processor) throws HighFrequencySmallIntervalException {
-            if (processor.getTransactions(2).size() >=3) {
+            if (processor.getAllTransactions(2).size() >=3) {
                 throw new HighFrequencySmallIntervalException("high-frequency-small-interval");
             }
         }
     },
     DoubledTransaction {
         public void validate(Account account, Transaction transaction, TransactionProcessor processor) throws DoubledTransactionException {
-            Iterator it = processor.getTransactions(2).entrySet().iterator();
+            Iterator it = processor.getAllTransactions(2).entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry)it.next();
                 Transaction currentTransaction = (Transaction)pair.getKey();

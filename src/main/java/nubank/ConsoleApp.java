@@ -22,22 +22,20 @@ public class ConsoleApp
 
         TransactionProcessor processor = new TransactionProcessor();
 
-        Transaction transaction = new Transaction(account, "teste", 30, Instant.now().toString(), processor);
+        Transaction transaction = new Transaction("teste", 30, Instant.now().toString());
         processor.addTransaction(transaction, account);
         System.out.println(nubank.utils.Converter.toJson(account));
 
-        Transaction transaction2 = new Transaction(account, "teste2", 30,Instant.now().toString(), processor);
+        Transaction transaction2 = new Transaction("teste2", 30,Instant.now().toString());
         processor.addTransaction(transaction2, account);
         System.out.println(nubank.utils.Converter.toJson(account));
 
-        Transaction transaction3 = new Transaction(account, "teste2", 30,Instant.now().toString(), processor);
+        Transaction transaction3 = new Transaction("teste2", 30,Instant.now().toString());
         processor.addTransaction(transaction3, account);
         System.out.println(nubank.utils.Converter.toJson(account));
 
-        Transaction transaction4 = new Transaction(account, "teste4", 30,Instant.now().toString(), processor);
+        Transaction transaction4 = new Transaction("teste4", 30,Instant.now().toString());
         processor.addTransaction(transaction4, account);
         System.out.println(nubank.utils.Converter.toJson(account));
-
-
     }
 }

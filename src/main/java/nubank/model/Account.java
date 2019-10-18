@@ -1,5 +1,6 @@
 package nubank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import nubank.exception.BusinessException;
@@ -29,11 +30,11 @@ public class Account {
         return violations;
     }
 
-    void setViolations(String violations) {
+    public void setViolations(String violations) {
         this.violations = new String[]{violations};
     }
 
-    void resetViolations() {
+    public void resetViolations() {
         this.violations = new String[]{};
     }
 
@@ -66,6 +67,11 @@ public class Account {
             return false;
         }
         return true;
+    }
+
+    @JsonIgnore
+    public boolean isValid(){
+        return this.getViolations().length == 0;
     }
 
 }
