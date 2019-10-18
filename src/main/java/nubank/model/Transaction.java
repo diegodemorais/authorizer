@@ -1,6 +1,7 @@
 package nubank.model;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
+import nubank.TransactionProcessor;
 import nubank.exception.BusinessException;
 import nubank.validator.IAccountValidator;
 import nubank.validator.ITransactionValidator;
@@ -14,16 +15,19 @@ public class Transaction {
     private Integer amount;
     private Instant time;
 
-    public Transaction(Account account, String merchant, int amount, String time) {
+    public Transaction(Account account, String merchant, int amount, String time, TransactionProcessor processor) {
+        account.resetViolations();
         this.setTransaction(merchant, amount, time);
-        this.validate(account, this, TransactionValidator.CardNotActive);
-        this.validate(account, this, TransactionValidator.InsufficientLimit);
+        this.validate(account, this, processor, TransactionValidator.CardNotActive);
+        this.validate(account, this, processor, TransactionValidator.InsufficientLimit);
+        this.validate(account, this, processor, TransactionValidator.HighFrequencySmallInterval);
+        this.validate(account, this, processor,  TransactionValidator.DoubledTransaction);
         this.tryResetTransaction(account);
     }
 
-    void validate(Account account, Transaction transaction, ITransactionValidator validator) {
+    void validate(Account account, Transaction transaction, TransactionProcessor processor, ITransactionValidator validator) {
         try {
-            validator.validate(account, transaction);
+            validator.validate(account, transaction, processor);
         } catch (BusinessException e) {
             account.setViolations(e.getMessage());
         }
@@ -54,6 +58,6 @@ public class Transaction {
     }
 
     public Boolean isValid(){
-        return this.getAmount() == null || this.getAmount() > 0;
+        return this.getAmount() != null && this.getAmount() > 0;
     }
 }

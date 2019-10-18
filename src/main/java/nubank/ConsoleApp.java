@@ -3,6 +3,8 @@ package nubank;
 import nubank.model.Account;
 import nubank.model.Transaction;
 
+import java.time.Instant;
+
 /**
  * Hello world!
  *
@@ -11,7 +13,7 @@ public class ConsoleApp
 {
     public static void main( String[] args ) {
         Account account = new Account();
-        account.createAccount(false, 100);
+        account.createAccount(true, 500);
         System.out.println(nubank.utils.Converter.toJson(account));
 //        account.createAccount(true, 350);
 //        System.out.println(nubank.utils.Converter.toJson(account));
@@ -20,10 +22,22 @@ public class ConsoleApp
 
         TransactionProcessor processor = new TransactionProcessor();
 
-        Transaction transaction = new Transaction(account, "teste", 30,"2019-02-13T10:00:00.000Z");
-        processor.addTransaction(account, transaction);
-
+        Transaction transaction = new Transaction(account, "teste", 30, Instant.now().toString(), processor);
+        processor.addTransaction(transaction, account);
         System.out.println(nubank.utils.Converter.toJson(account));
+
+        Transaction transaction2 = new Transaction(account, "teste2", 30,Instant.now().toString(), processor);
+        processor.addTransaction(transaction2, account);
+        System.out.println(nubank.utils.Converter.toJson(account));
+
+        Transaction transaction3 = new Transaction(account, "teste2", 30,Instant.now().toString(), processor);
+        processor.addTransaction(transaction3, account);
+        System.out.println(nubank.utils.Converter.toJson(account));
+
+        Transaction transaction4 = new Transaction(account, "teste4", 30,Instant.now().toString(), processor);
+        processor.addTransaction(transaction4, account);
+        System.out.println(nubank.utils.Converter.toJson(account));
+
 
     }
 }
