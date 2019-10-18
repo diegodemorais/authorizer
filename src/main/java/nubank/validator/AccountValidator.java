@@ -1,16 +1,12 @@
 package nubank.validator;
 
 import nubank.exception.AccountAlreadyInitializedException;
-import nubank.exception.BusinessException;
 import nubank.model.Account;
-import nubank.model.Base;
 
-public enum AccountValidator implements BusinessValidator {
+public enum AccountValidator implements IAccountValidator {
 
     AccountAlreadyInitialized {
-        @Override
-        public void validate(Base base) throws AccountAlreadyInitializedException {
-            Account account = (Account)base;
+        public void validate(Account account) throws AccountAlreadyInitializedException {
             if (account.getActiveCard() != null) {
                 throw new AccountAlreadyInitializedException("account-already-initialized");
             }
