@@ -3,7 +3,7 @@ package nubank.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import nubank.exception.BusinessException;
 import nubank.validator.AccountValidator;
-import nubank.IValidator.IAccountValidator;
+import nubank.ivalidator.IAccountValidator;
 
 public class AccountViolations {
     private Account account;

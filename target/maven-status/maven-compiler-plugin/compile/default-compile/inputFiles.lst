@@ -1,5 +1,5 @@
 C:\dev\inter\nubank\authorizer\src\main\java\nubank\Authorizer.java
-C:\dev\inter\nubank\authorizer\src\main\java\nubank\IValidator\ITransactionProcessorValidator.java
+C:\dev\inter\nubank\authorizer\src\main\java\nubank\ivalidator\ITransactionProcessorValidator.java
 C:\dev\inter\nubank\authorizer\src\main\java\nubank\exception\AccountAlreadyInitializedException.java
 C:\dev\inter\nubank\authorizer\src\main\java\nubank\exception\CardNotActiveException.java
 C:\dev\inter\nubank\authorizer\src\main\java\nubank\ConsoleApp.java
@@ -10,7 +10,7 @@ C:\dev\inter\nubank\authorizer\src\main\java\nubank\TransactionProcessor.java
 C:\dev\inter\nubank\authorizer\src\main\java\nubank\model\Account.java
 C:\dev\inter\nubank\authorizer\src\main\java\nubank\model\Transaction.java
 C:\dev\inter\nubank\authorizer\src\main\java\nubank\model\AccountViolations.java
-C:\dev\inter\nubank\authorizer\src\main\java\nubank\IValidator\IAccountValidator.java
+C:\dev\inter\nubank\authorizer\src\main\java\nubank\ivalidator\IAccountValidator.java
 C:\dev\inter\nubank\authorizer\src\main\java\nubank\exception\InsufficientLimitException.java
 C:\dev\inter\nubank\authorizer\src\main\java\nubank\validator\TransactionProcessorValidator.java
 C:\dev\inter\nubank\authorizer\src\main\java\nubank\exception\BusinessException.java

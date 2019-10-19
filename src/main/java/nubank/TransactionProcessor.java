@@ -4,7 +4,7 @@ import nubank.exception.BusinessException;
 import nubank.model.Account;
 import nubank.model.AccountViolations;
 import nubank.model.Transaction;
-import nubank.IValidator.ITransactionProcessorValidator;
+import nubank.ivalidator.ITransactionProcessorValidator;
 import nubank.validator.TransactionProcessorValidator;
 
 import java.time.Instant;

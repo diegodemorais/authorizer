@@ -2,7 +2,7 @@ package nubank.validator;
 
 import nubank.exception.AccountAlreadyInitializedException;
 import nubank.model.Account;
-import nubank.IValidator.IAccountValidator;
+import nubank.ivalidator.IAccountValidator;
 
 public enum AccountValidator implements IAccountValidator {
 

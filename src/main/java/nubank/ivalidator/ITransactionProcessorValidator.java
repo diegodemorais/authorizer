@@ -1,4 +1,4 @@
-package nubank.IValidator;
+package nubank.ivalidator;
 
 import nubank.TransactionProcessor;
 import nubank.exception.BusinessException;
