@@ -1,3 +1,7 @@
+/**
+ * @project Nubank code challenge: Transaction Authorizer
+ * @author Diego de Morais on oct/19
+ */
 package nubank;
 
 import nubank.exception.BusinessException;
@@ -6,7 +10,6 @@ import nubank.model.AccountViolations;
 import nubank.model.Transaction;
 import nubank.ivalidator.ITransactionProcessorValidator;
 import nubank.validator.TransactionProcessorValidator;
-
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Iterator;

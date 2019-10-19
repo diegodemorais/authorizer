@@ -1,3 +1,7 @@
+/**
+ * @project Nubank code challenge: Transaction Authorizer
+ * @author Diego de Morais on oct/19
+ */
 package nubank.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,8 +22,6 @@ public class Converter {
         try {
             json = mapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
-            e.printStackTrace(); //TODO: validate the json properly
-        } catch (IOException e) {
             e.printStackTrace(); //TODO: validate the json properly
         }
         return json;

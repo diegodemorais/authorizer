@@ -1,9 +1,12 @@
+/**
+ * @project Nubank code challenge: Transaction Authorizer
+ * @author Diego de Morais on oct/19
+ */
 package nubank;
 
 import nubank.model.AccountViolations;
 import nubank.model.Transaction;
 import nubank.utils.Converter;
-
 import java.util.Scanner;
 
 public class Authorizer {
