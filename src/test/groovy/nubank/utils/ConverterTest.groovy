@@ -1,26 +1,25 @@
 package nubank.utils
 
 import nubank.model.Account
+import nubank.model.AccountViolations
 import nubank.model.Transaction
 import spock.lang.Specification
 
 import java.time.Instant
 
 class ConverterTest extends Specification {
-    Account account;
+    AccountViolations accountViolations;
 
     def "convert a json to Account"() {
         given:
         String json = "{ \"account\": { \"activeCard\": true, \"availableLimit\": 100 } }"
 
         when:
-
-        Account account = Converter.fromJsonToAccount(json);
+        accountViolations = Converter.fromJsonToAccountViolations(json);
 
         then:
-        account.getActiveCard() == true
-        account.getAvailableLimit() == 100
-        account.getViolations().length == 0
+        accountViolations.getAccount().getActiveCard() == true
+        accountViolations.getAccount().getAvailableLimit() == 100
     }
 
     def "convert a json to Transaction"() {

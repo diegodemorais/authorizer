@@ -6,13 +6,14 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
 import nubank.model.Account;
+import nubank.model.AccountViolations;
 import nubank.model.Transaction;
 
 public class Converter {
 
     static public String toJson(Object obj) {
         ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         String json = null;
         try {
             json = mapper.writeValueAsString(obj);
@@ -22,16 +23,15 @@ public class Converter {
         return json;
     }
 
-    public static Account fromJsonToAccount(String json) {
-        Account account = null;
+    public static AccountViolations fromJsonToAccountViolations(String json) {
+        AccountViolations accountViolations = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
-            account = mapper.readValue(json, Account.class);
+            accountViolations = mapper.readValue(json, AccountViolations.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace(); //TODO: validate the json properly
         }
-        return account;
+        return accountViolations;
     }
 
     public static Transaction fromJsonToTransaction(String json) {
@@ -48,5 +48,9 @@ public class Converter {
 
     public static boolean isAccountJson(String json) {
         return json.replace(" ", "").startsWith("{\"account\":");
+    }
+
+    public static String removeLineEnds(String s) {
+        return s.replace("\r", "").replace("\n", "");
     }
 }

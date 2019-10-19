@@ -1,33 +1,34 @@
 package nubank.validator
 
 import nubank.model.Account
+import nubank.model.AccountViolations
 import spock.lang.Specification
 
-class AccountValidatorTest extends Specification {
-    Account account;
+class AccountViolationsValidatorTest extends Specification {
+    AccountViolations accountViolations;
 
     def setup() {
-        account = new Account();
+        accountViolations = new AccountViolations();
     }
 
     def "create account"() {
         when:
-        account.createAccount(true, 500);
+        accountViolations.createAccount(true, 500);
 
         then:
-        account.getActiveCard() == true
-        account.getAvailableLimit() == 500
+        accountViolations.getAccount().getActiveCard() == true
+        accountViolations.getAccount().getAvailableLimit() == 500
     }
 
     def "create account twice should be denied"() {
         given:
-        account.createAccount(true, 500);
+        accountViolations.createAccount(true, 500);
 
         when:
-        account.createAccount(true, 350);
+        accountViolations.createAccount(true, 350);
 
         then:
-        account.getViolations().length == 1
-        account.getViolations()[0] == "account-already-initialized"
+        accountViolations.getViolations().length == 1
+        accountViolations.getViolations()[0] == "account-already-initialized"
     }
 }

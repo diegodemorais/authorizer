@@ -7,8 +7,8 @@ import nubank.exception.HighFrequencySmallIntervalException;
 import nubank.exception.InsufficientLimitException;
 import nubank.model.Account;
 import nubank.model.Transaction;
+import nubank.IValidator.ITransactionProcessorValidator;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
