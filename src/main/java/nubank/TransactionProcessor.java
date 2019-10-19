@@ -3,6 +3,7 @@ package nubank;
 import nubank.exception.BusinessException;
 import nubank.model.Account;
 import nubank.model.Transaction;
+import nubank.utils.Converter;
 import nubank.validator.ITransactionProcessorValidator;
 import nubank.validator.TransactionProcessorValidator;
 
@@ -47,6 +48,15 @@ public class TransactionProcessor {
         this.validate(account, transaction, TransactionProcessorValidator.DoubledTransaction);
         this.applyTransaction(transaction, account);
     }
+
+//    public void process(String json){
+//        if ( Converter.isAccountJson(json) ) {
+//            Account account = Converter.fromJsonToAccount(json);
+//        }
+//
+//        addTransaction(transaction, account);
+//        System.out.println(Converter.toJson(account));
+//    }
 
     void validate(Account account, Transaction transaction, ITransactionProcessorValidator validator) {
         if (account.isValid()) { //Prioritizing validations: the previous is the priority

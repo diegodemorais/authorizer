@@ -14,6 +14,7 @@ class ConverterTest extends Specification {
         String json = "{ \"account\": { \"activeCard\": true, \"availableLimit\": 100 } }"
 
         when:
+
         Account account = Converter.fromJsonToAccount(json);
 
         then:

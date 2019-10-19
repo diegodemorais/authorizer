@@ -24,7 +24,7 @@ public enum TransactionProcessorValidator implements ITransactionProcessorValida
     },
     CardNotActive {
         public void validate(Account account, Transaction transaction, TransactionProcessor processor) throws CardNotActiveException {
-            if (!account.getActiveCard()) {
+            if (account.getActiveCard() == null || !account.getActiveCard()) {
                 throw new CardNotActiveException("card-not-active");
             }
         }

@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.*;
 import nubank.model.Account;
 import nubank.model.Transaction;
 
@@ -30,7 +27,7 @@ public class Converter {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
-        account = mapper.readValue(json, Account.class);
+            account = mapper.readValue(json, Account.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace(); //TODO: validate the json properly
         }
@@ -47,5 +44,9 @@ public class Converter {
             e.printStackTrace(); //TODO: validate the json properly
         }
         return transaction;
+    }
+
+    public static boolean isAccountJson(String json) {
+        return json.replace(" ", "").startsWith("{\"account\":");
     }
 }
