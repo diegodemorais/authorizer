@@ -1,11 +1,8 @@
 package nubank.utils;
-
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.Nulls;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.*;
-import nubank.model.Account;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import nubank.model.AccountViolations;
 import nubank.model.Transaction;
 
@@ -29,6 +26,7 @@ public class Converter {
             ObjectMapper mapper = new ObjectMapper();
             accountViolations = mapper.readValue(json, AccountViolations.class);
         } catch (JsonProcessingException e) {
+            System.out.println("DEU PAU NO DESERIALIZER!!");
             e.printStackTrace(); //TODO: validate the json properly
         }
         return accountViolations;

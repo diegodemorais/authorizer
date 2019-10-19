@@ -31,14 +31,14 @@ public enum TransactionProcessorValidator implements ITransactionProcessorValida
     },
     HighFrequencySmallInterval {
         public void validate(Account account, Transaction transaction, TransactionProcessor processor) throws HighFrequencySmallIntervalException {
-            if (processor.getTransactions(2).size() >=3) {
+            if (processor.getTransactions(transaction.getTime(), 2).size() >=3) {
                 throw new HighFrequencySmallIntervalException("high-frequency-small-interval");
             }
         }
     },
     DoubledTransaction {
         public void validate(Account account, Transaction transaction, TransactionProcessor processor) throws DoubledTransactionException {
-            LinkedHashMap<Transaction, Account> transactions = processor.getTransactions(2);
+            LinkedHashMap<Transaction, Account> transactions = processor.getTransactions(transaction.getTime(), 2);
             Iterator it = transactions.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry)it.next();

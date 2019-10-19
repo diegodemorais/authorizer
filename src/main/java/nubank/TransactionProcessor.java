@@ -25,14 +25,16 @@ public class TransactionProcessor {
         return this.transactions;
     }
 
-    public LinkedHashMap<Transaction, Account> getTransactions(Integer fromMinutesAgo) {
-        Instant minutesAgo = Instant.now().minus(fromMinutesAgo, ChronoUnit.MINUTES);
+    public LinkedHashMap<Transaction, Account> getTransactions(Instant base, Integer intervalInMinutes) {
         LinkedHashMap<Transaction, Account> transactionsFiltered = new LinkedHashMap<>();
         Iterator iterator = this.getAllTransactions().entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry pair = (Map.Entry) iterator.next();
             Transaction currentTransaction = (Transaction) pair.getKey();
-            if (currentTransaction.getTime().compareTo(minutesAgo) >= 0) {
+            Instant start = base.minus(intervalInMinutes,ChronoUnit.MINUTES);
+            Instant end = base.plus(intervalInMinutes,ChronoUnit.MINUTES);
+            if (currentTransaction.getTime().compareTo(start) >= 0
+                && currentTransaction.getTime().compareTo(end) <= 0) {
                 transactionsFiltered.put(currentTransaction, (Account) pair.getValue());
             }
         }

@@ -1,6 +1,5 @@
 package nubank.utils
 
-import nubank.model.Account
 import nubank.model.AccountViolations
 import nubank.model.Transaction
 import spock.lang.Specification

@@ -1,6 +1,5 @@
 package nubank;
 
-import nubank.model.Account;
 import nubank.model.AccountViolations;
 import nubank.model.Transaction;
 import nubank.utils.Converter;
