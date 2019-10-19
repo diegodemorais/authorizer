@@ -14,7 +14,7 @@ $ mvn clean install
 
 > Usage
 Indicate the transactions file path as stdin input for the program. In this example, operations (on project directory):
-$./authorize < operations
+$./authorize operations
 or
 $ cd target
 $ java -jar java -jar authorizer-1.0.jar < ../operations
