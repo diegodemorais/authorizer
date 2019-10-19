@@ -1,4 +1,4 @@
-package nubank.validator
+package nubank.groovy
 
 import nubank.TransactionProcessor
 import nubank.model.Account

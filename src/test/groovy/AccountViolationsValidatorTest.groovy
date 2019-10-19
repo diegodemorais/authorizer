@@ -1,6 +1,5 @@
-package nubank.validator
+package nubank.groovy
 
-import nubank.model.Account
 import nubank.model.AccountViolations
 import spock.lang.Specification
 

@@ -1,5 +1,6 @@
-package nubank
+package nubank.groovy
 
+import nubank.Authorizer
 import nubank.utils.Converter
 import spock.lang.Specification
 

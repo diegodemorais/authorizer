@@ -1,10 +1,13 @@
 package nubank.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import nubank.model.AccountViolations;
 import nubank.model.Transaction;
+
+import java.io.IOException;
 
 public class Converter {
 
@@ -15,10 +18,12 @@ public class Converter {
         try {
             json = mapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            e.printStackTrace(); //TODO: validate the json properly
+        } catch (IOException e) {
+            e.printStackTrace(); //TODO: validate the json properly
         }
         return json;
-    }
+}
 
     public static AccountViolations fromJsonToAccountViolations(String json) {
         AccountViolations accountViolations = null;
@@ -27,6 +32,8 @@ public class Converter {
             accountViolations = mapper.readValue(json, AccountViolations.class);
         } catch (JsonProcessingException e) {
             System.out.println("DEU PAU NO DESERIALIZER!!");
+            e.printStackTrace(); //TODO: validate the json properly
+        } catch (IOException e) {
             e.printStackTrace(); //TODO: validate the json properly
         }
         return accountViolations;
@@ -39,6 +46,8 @@ public class Converter {
             mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
             transaction = mapper.readValue(json, Transaction.class);
         } catch (JsonProcessingException e) {
+            e.printStackTrace(); //TODO: validate the json properly
+        } catch (IOException e) {
             e.printStackTrace(); //TODO: validate the json properly
         }
         return transaction;
