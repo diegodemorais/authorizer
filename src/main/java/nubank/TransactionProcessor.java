@@ -7,6 +7,7 @@ import nubank.validator.ITransactionProcessorValidator;
 import nubank.validator.TransactionProcessorValidator;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -20,22 +21,22 @@ public class TransactionProcessor {
     }
 
     public LinkedHashMap<Transaction, Account> getAllTransactions() {
-        return transactions;
+        return this.transactions;
     }
 
-    public LinkedHashMap<Transaction, Account> getAllTransactions(Integer fromMinutesAgo) {
-        Instant minutesAgo = Instant.now().minusSeconds(fromMinutesAgo * 60);
-        LinkedHashMap<Transaction, Account> transactionsFromMinutesAgo = new LinkedHashMap<>();
+    public LinkedHashMap<Transaction, Account> getTransactions(Integer fromMinutesAgo) {
+        Instant minutesAgo = Instant.now().minus(fromMinutesAgo, ChronoUnit.MINUTES);
+        LinkedHashMap<Transaction, Account> transactionsFiltered = new LinkedHashMap<>();
         Iterator iterator = this.getAllTransactions().entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry pair = (Map.Entry) iterator.next();
             Transaction currentTransaction = (Transaction) pair.getKey();
             if (currentTransaction.getTime().compareTo(minutesAgo) >= 0) {
-                transactionsFromMinutesAgo.put(currentTransaction, (Account) pair.getValue());
+                transactionsFiltered.put(currentTransaction, (Account) pair.getValue());
             }
         }
 
-        return transactions;
+        return transactionsFiltered;
     }
 
     public void addTransaction(Transaction transaction, Account account) {

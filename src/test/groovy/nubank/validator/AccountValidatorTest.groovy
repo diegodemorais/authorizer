@@ -20,13 +20,13 @@ class AccountValidatorTest extends Specification {
     }
 
     def "create account twice should be denied"() {
-        when:
+        given:
         account.createAccount(true, 500);
+
+        when:
         account.createAccount(true, 350);
 
         then:
-        account.getActiveCard() == true
-        account.getAvailableLimit() == 500
         account.getViolations().length == 1
         account.getViolations()[0] == "account-already-initialized"
     }
