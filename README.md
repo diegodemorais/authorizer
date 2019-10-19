@@ -24,7 +24,7 @@ mvn clean install
 Indicate the transactions file path as **stdin** input for the program. In this example, `operations` (on project directory):
 
 ```bash
-./authorize < operations
+./authorize operations
 ```
 or
 ```bash
